@@ -22,6 +22,11 @@ class ExpenseData extends ChangeNotifier{
     overAllExpenseList.remove(expense);
     notifyListeners();
   }
+  // Update the expense
+  void updateExpense(ExpenseItem expense){
+    overAllExpenseList.remove(expense);
+    notifyListeners();
+  }
 
   // Get weekend (mon, tue, ect) from DateTime object
   String getDayName(DateTime dateTime){

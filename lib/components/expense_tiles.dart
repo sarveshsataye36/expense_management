@@ -7,7 +7,7 @@ class ExpenseTiles extends StatelessWidget {
   void Function(BuildContext)? deleteTapped;
   void Function(BuildContext)? editTapped;
 
-   ExpenseTiles({super.key, required this.expenseName, required this.expenseAmount, required this.expenseDateTime, required this.deleteTapped});
+   ExpenseTiles({super.key, required this.expenseName, required this.expenseAmount, required this.expenseDateTime, required this.deleteTapped, required this.editTapped});
 
 
   @override

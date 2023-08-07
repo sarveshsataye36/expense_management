@@ -79,6 +79,10 @@ class _HomePageState extends State<HomePage> {
     Provider.of<ExpenseData>(context,listen: false).deleteExpense(expense);
   }
   //
+  void updateExpense(ExpenseItem expense){
+    Provider.of<ExpenseData>(context,listen: false).updateExpense(expense);
+  }
+  //
   @override
   Widget build(BuildContext context) {
     return Consumer<ExpenseData>(builder: (context, value, child)=>Scaffold(
@@ -89,6 +93,7 @@ class _HomePageState extends State<HomePage> {
       body: ListView(
         children: [
           //
+
           const SizedBox(
             height: 10,
           ),
@@ -107,6 +112,7 @@ class _HomePageState extends State<HomePage> {
                 expenseAmount: value.getAllExpenseList()[index].amount,
                 expenseDateTime: value.getAllExpenseList()[index].dateTime,
                 deleteTapped: (p0)=>deleteExpense(value.getAllExpenseList()[index]),
+                editTapped: (p0)=>updateExpense(value.getAllExpenseList()[index]),
             ),
           ),
         ],
