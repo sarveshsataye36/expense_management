@@ -1,8 +1,12 @@
+import 'package:expense_management/data/expense_curd.dart';
 import 'package:expense_management/helpers/date_time_helper.dart';
 import 'package:flutter/cupertino.dart';
 import '../module/expense_item.dart';
 
 class ExpenseData extends ChangeNotifier{
+  // expenseCurd object that connected to hive database
+  final expenseCurd = ExpenseCurd();
+
   // List of all expense
   List<ExpenseItem> overAllExpenseList = [];
 
@@ -10,22 +14,33 @@ class ExpenseData extends ChangeNotifier{
   List<ExpenseItem> getAllExpenseList(){
     return overAllExpenseList;
   }
-
+  // Prepare data to display on launch form db
+  void prepareData(){
+    if(expenseCurd.readData().isNotEmpty){
+      overAllExpenseList = expenseCurd.readData();
+    }
+  }
   // Add new expense
   void addNewExpense(ExpenseItem newExpense){
     overAllExpenseList.add(newExpense);
     notifyListeners();
+    // save expense data after add to overAllExpenseList
+    expenseCurd.saveData(overAllExpenseList);
   }
 
   // Delete the expense
   void deleteExpense(ExpenseItem expense){
     overAllExpenseList.remove(expense);
     notifyListeners();
+    // save expense data after delete
+    expenseCurd.saveData(overAllExpenseList);
   }
   // Update the expense
   void updateExpense(ExpenseItem expense){
     overAllExpenseList.remove(expense);
     notifyListeners();
+    // save expense data after update
+    expenseCurd.saveData(overAllExpenseList);
   }
 
   // Get weekend (mon, tue, ect) from DateTime object

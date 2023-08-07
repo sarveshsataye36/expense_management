@@ -39,6 +39,8 @@ dependencies:
   fl_chart:
   google_fonts:
   flutter_slidable:
+  hive:
+  hive_flutter:
 
 dev_dependencies:
   flutter_test:
