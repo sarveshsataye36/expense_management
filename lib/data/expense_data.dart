@@ -36,9 +36,11 @@ class ExpenseData extends ChangeNotifier{
     expenseCurd.saveData(overAllExpenseList);
   }
   // Update the expense
-  void updateExpense(ExpenseItem expense){
+  void updateExpense(ExpenseItem expense,newExpense){
     overAllExpenseList.remove(expense);
+    overAllExpenseList.add(newExpense);
     notifyListeners();
+    //notifyListeners();
     // save expense data after update
     expenseCurd.saveData(overAllExpenseList);
   }
