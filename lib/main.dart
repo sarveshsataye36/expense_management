@@ -2,6 +2,7 @@ import 'package:expense_management/data/expense_data.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
+import 'pages/dashboard.dart';
 import 'pages/home_page/home_page.dart';
 
 void main() async{
@@ -26,7 +27,7 @@ class ExpenseManagementApp extends StatelessWidget {
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: HomePage(),
+        home: Dashboard(),
       ),
     );
   }
