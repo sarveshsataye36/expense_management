@@ -12,26 +12,28 @@ class ExpenseTiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 0, 20, 1),
-      child: Slidable(
-        endActionPane: ActionPane(
-          motion:  const StretchMotion(),
-          children: [
-            SlidableAction(
-              onPressed: editTapped,
-              icon: Icons.edit,
-              backgroundColor: Colors.green,
-            ),
-            SlidableAction(
-              onPressed: deleteTapped,
-              icon: Icons.delete,
-              backgroundColor: Colors.redAccent,
-            )
-          ],
-        ),
+    return Slidable(
+      endActionPane: ActionPane(
+        motion:  const StretchMotion(),
+        children: [
+          SlidableAction(
+            onPressed: editTapped,
+            icon: Icons.edit,
+            backgroundColor: Colors.green,
+          ),
+          SlidableAction(
+            onPressed: deleteTapped,
+            icon: Icons.delete,
+            backgroundColor: Colors.redAccent,
+          )
+        ],
+      ),
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(0, 0, 0, 2),
+        decoration: BoxDecoration(
+            color: Colors.grey[200],
+            border: const Border(bottom: BorderSide(color: Colors.white))),
         child: ListTile(
-          tileColor: Colors.white70,
           title: Text(expenseName),
           subtitle: Text('${expenseDateTime.day}/${expenseDateTime.month}/${expenseDateTime.year}'),
           trailing: Text('₹ $expenseAmount'),

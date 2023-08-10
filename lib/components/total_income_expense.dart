@@ -8,7 +8,7 @@ class TotalIncomeExpenseUi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: textColor,
         borderRadius: BorderRadius.circular(8),
@@ -20,7 +20,7 @@ class TotalIncomeExpenseUi extends StatelessWidget {
           Row(
             children: [
               const Icon(Icons.arrow_downward_rounded,
-                size: 40,
+                size: 30,
                 color: Colors.green,
               ),
               const SizedBox(
@@ -32,7 +32,7 @@ class TotalIncomeExpenseUi extends StatelessWidget {
                   Text('Income',
                     style: GoogleFonts.inter(
                         textStyle: Theme.of(context).textTheme.displayLarge,
-                        fontSize: 16,
+                        fontSize: 14,
                         fontWeight: FontWeight.normal,
                         fontStyle: FontStyle.normal,
                         color: Colors.white
@@ -44,7 +44,7 @@ class TotalIncomeExpenseUi extends StatelessWidget {
                   Text('\$200',
                     style: GoogleFonts.inter(
                         textStyle: Theme.of(context).textTheme.displayLarge,
-                        fontSize: 25,
+                        fontSize: 20,
                         fontWeight: FontWeight.normal,
                         fontStyle: FontStyle.normal,
                         color: Colors.white
@@ -57,7 +57,7 @@ class TotalIncomeExpenseUi extends StatelessWidget {
           Text('|',
             style: GoogleFonts.inter(
                 textStyle: Theme.of(context).textTheme.displayLarge,
-                fontSize: 25,
+                fontSize: 20,
                 fontWeight: FontWeight.normal,
                 fontStyle: FontStyle.normal,
                 color: Colors.white
@@ -65,7 +65,7 @@ class TotalIncomeExpenseUi extends StatelessWidget {
           Row(
             children: [
               const Icon(Icons.arrow_upward_rounded,
-                size: 40,
+                size: 30,
                 color: Colors.red,
               ),
               const SizedBox(
@@ -77,7 +77,7 @@ class TotalIncomeExpenseUi extends StatelessWidget {
                   Text('Expense',
                     style: GoogleFonts.inter(
                         textStyle: Theme.of(context).textTheme.displayLarge,
-                        fontSize: 16,
+                        fontSize: 14,
                         fontWeight: FontWeight.normal,
                         fontStyle: FontStyle.normal,
                         color: Colors.white
@@ -89,7 +89,7 @@ class TotalIncomeExpenseUi extends StatelessWidget {
                   Text('\$2000',
                     style: GoogleFonts.inter(
                         textStyle: Theme.of(context).textTheme.displayLarge,
-                        fontSize: 25,
+                        fontSize: 20,
                         fontWeight: FontWeight.normal,
                         fontStyle: FontStyle.normal,
                         color: Colors.white
