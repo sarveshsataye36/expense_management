@@ -97,7 +97,8 @@ class _HomePageState extends State<HomePage> {
       ExpenseItem newExpense = ExpenseItem(
           name: newExpenseNameController.text,
           amount: newExpenseAmountController.text,
-          dateTime: DateTime.now()
+          dateTime: DateTime.now(),
+          type: 'Expense'
       );
       // Add new expense
       Provider.of<ExpenseData>(context,listen: false).addNewExpense(newExpense);
@@ -117,7 +118,8 @@ class _HomePageState extends State<HomePage> {
       ExpenseItem newExpense = ExpenseItem(
           name: name,
           amount: amount,
-          dateTime: dateTime
+          dateTime: dateTime,
+          type: 'expense'
       );
       //
       Provider.of<ExpenseData>(context,listen: false).updateExpense(expense,newExpense);
@@ -172,6 +174,7 @@ class _HomePageState extends State<HomePage> {
                 expenseName: value.getAllExpenseList()[index].name,
                 expenseAmount: value.getAllExpenseList()[index].amount,
                 expenseDateTime: value.getAllExpenseList()[index].dateTime,
+                type:value.getAllExpenseList()[index].type,
                 deleteTapped: (p0)=>deleteExpense(value.getAllExpenseList()[index]),
                 editTapped: (p0)=>updateCurrentExpense(value.getAllExpenseList()[index],value.getAllExpenseList()[index].name,value.getAllExpenseList()[index].amount),
             ),

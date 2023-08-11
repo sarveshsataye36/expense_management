@@ -3,7 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../helpers/constant.dart';
 
 class TotalBalanceUi extends StatelessWidget {
-  const TotalBalanceUi({super.key});
+  String totalBalance;
+  TotalBalanceUi({super.key,required this.totalBalance});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,7 @@ class TotalBalanceUi extends StatelessWidget {
                     const SizedBox(
                       height: 5,
                     ),
-                    Text('50,000\$',
+                    Text(totalBalance,
                       style: GoogleFonts.inter(
                           textStyle: Theme.of(context).textTheme.displayLarge,
                           fontSize: 30,

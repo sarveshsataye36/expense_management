@@ -20,6 +20,7 @@ class ExpenseCurd{
       List<dynamic>  expenseFormatted = [
         expense.name,
         expense.amount,
+        expense.type,
         expense.dateTime
       ];
       allExpenseFormatted.add(expenseFormatted);
@@ -39,9 +40,10 @@ class ExpenseCurd{
     for(int i=0; i<saveExpenses.length; i++){
       String name = saveExpenses[i][0];
       String amount = saveExpenses[i][1];
+      String type = saveExpenses[i][2];
       DateTime dateTime = saveExpenses[i][2];
 
-      ExpenseItem expense = ExpenseItem(name: name, amount: amount, dateTime: dateTime);
+      ExpenseItem expense = ExpenseItem(name: name, amount: amount, type: type, dateTime: dateTime);
       allExpense.add(expense);
     }
     return allExpense;

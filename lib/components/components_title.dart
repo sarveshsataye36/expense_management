@@ -15,7 +15,7 @@ class ComponentTitle extends StatelessWidget {
       style: GoogleFonts.lato(
           textStyle: Theme.of(context).textTheme.displayLarge,
           fontSize: 20,
-          fontWeight: FontWeight.w500,
+          fontWeight: FontWeight.w600,
           fontStyle: FontStyle.normal,
           color: textColor
       ),

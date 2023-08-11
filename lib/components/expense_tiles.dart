@@ -3,11 +3,12 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 class ExpenseTiles extends StatelessWidget {
   final String expenseName;
   final String expenseAmount;
+  final String type;
   final DateTime expenseDateTime;
   void Function(BuildContext)? deleteTapped;
   void Function(BuildContext)? editTapped;
 
-   ExpenseTiles({super.key, required this.expenseName, required this.expenseAmount, required this.expenseDateTime, required this.deleteTapped, required this.editTapped});
+   ExpenseTiles({super.key, required this.expenseName, required this.expenseAmount, required this.expenseDateTime,required this.type, required this.deleteTapped, required this.editTapped});
 
 
   @override
@@ -34,9 +35,9 @@ class ExpenseTiles extends StatelessWidget {
             color: Colors.grey[200],
             border: const Border(bottom: BorderSide(color: Colors.white))),
         child: ListTile(
-          title: Text(expenseName),
+          title: Text(expenseName,style: const TextStyle(fontWeight: FontWeight.w600),),
           subtitle: Text('${expenseDateTime.day}/${expenseDateTime.month}/${expenseDateTime.year}'),
-          trailing: Text('₹ $expenseAmount'),
+          trailing: type == 'Expense' ? Text('- ₹ $expenseAmount',style: const TextStyle(color: Colors.redAccent,fontWeight: FontWeight.w600),) : Text('+ ₹ $expenseAmount',style: const TextStyle(color: Colors.green,fontWeight: FontWeight.w600),),
         ),
       ),
     );
