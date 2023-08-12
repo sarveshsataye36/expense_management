@@ -1,9 +1,10 @@
 import 'package:hive/hive.dart';
+import '../helpers/constant.dart';
 import '../module/expense_item.dart';
 
 class ExpenseCurd{
   // reference the box
-  final _myBox = Hive.box('expense_management');
+  final _myBox = Hive.box(databaseName);
 
   // Write the Data
   void saveData(List<ExpenseItem> allExpense){
@@ -41,7 +42,7 @@ class ExpenseCurd{
       String name = saveExpenses[i][0];
       String amount = saveExpenses[i][1];
       String type = saveExpenses[i][2];
-      DateTime dateTime = saveExpenses[i][2];
+      DateTime dateTime = saveExpenses[i][3];
 
       ExpenseItem expense = ExpenseItem(name: name, amount: amount, type: type, dateTime: dateTime);
       allExpense.add(expense);

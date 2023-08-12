@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../helpers/constant.dart';
 
 class TotalIncomeExpenseUi extends StatelessWidget {
-  String income;
-  String expense;
+  double income;
+  double expense;
    TotalIncomeExpenseUi({super.key, required this.income, required this.expense});
 
   @override
@@ -43,7 +43,7 @@ class TotalIncomeExpenseUi extends StatelessWidget {
                   const SizedBox(
                     height: 5,
                   ),
-                  Text(income,
+                  Text(income.toString(),
                     style: GoogleFonts.inter(
                         textStyle: Theme.of(context).textTheme.displayLarge,
                         fontSize: 20,
@@ -88,7 +88,7 @@ class TotalIncomeExpenseUi extends StatelessWidget {
                   const SizedBox(
                     height: 5,
                   ),
-                  Text(expense,
+                  Text(expense.toString(),
                     style: GoogleFonts.inter(
                         textStyle: Theme.of(context).textTheme.displayLarge,
                         fontSize: 20,

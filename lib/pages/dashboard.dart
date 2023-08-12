@@ -255,7 +255,7 @@ class _DashboardState extends State<Dashboard> {
       Provider.of<ExpenseData>(context, listen: false)
           .addNewExpense(newExpense);
     }
-
+    Provider.of<ExpenseData>(context, listen: false).totalBalance();
     Navigator.pop(context); // Remove the dialog box
     clearText();
   }
@@ -282,7 +282,7 @@ class _DashboardState extends State<Dashboard> {
           .updateExpense(expense, newExpense);
       //
     }
-
+    Provider.of<ExpenseData>(context, listen: false).totalBalance();
     Navigator.pop(context); // Remove the dialog box
     clearText();
   }
@@ -307,74 +307,76 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Consumer<ExpenseData>(
-      builder: (context, value, child) => Scaffold(
-          floatingActionButton: FloatingActionButton(
-              onPressed: addNewExpense,
-              backgroundColor: Colors.black54,
-              child: const Icon(Icons.add)),
-          backgroundColor: lightRedBackground,
-          body: Padding(
-            padding: const EdgeInsets.all(14),
-            child: Column(
-              children: [
-                // App bar with heading
-                const HeaderUi(),
-                //
-                const SizedBox(
-                  height: 20,
-                ),
+      builder: (context, value, child) => SafeArea(
+        child: Scaffold(
+            floatingActionButton: FloatingActionButton(
+                onPressed: addNewExpense,
+                backgroundColor: Colors.black54,
+                child: const Icon(Icons.add)),
+            backgroundColor: lightRedBackground,
+            body: Padding(
+              padding: const EdgeInsets.all(14),
+              child: Column(
+                children: [
+                  // App bar with heading
+                  const HeaderUi(),
+                  //
+                  const SizedBox(
+                    height: 20,
+                  ),
 
-                // Total Balance
-                TotalBalanceUi(
-                  totalBalance: '80,000 ₹',
-                ),
-                //
-                const SizedBox(
-                  height: 20,
-                ),
+                  // Total Balance
+                  TotalBalanceUi(
+                    totalBalance: Provider.of<ExpenseData>(context, listen: false).totalBalance(),
+                  ),
+                  //
+                  const SizedBox(
+                    height: 20,
+                  ),
 
-                // Total Expense & Income
-                TotalIncomeExpenseUi(
-                  income: '5,000 ₹',
-                  expense: '1,800 ₹',
-                ),
-                //
-                const SizedBox(
-                  height: 20,
-                ),
-                // Recent Transaction
-                ComponentTitle(title: 'Recent Transaction'),
-                const SizedBox(
-                  height: 20,
-                ),
-                Expanded(
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: value.getAllExpenseList().isEmpty
-                        ? const NoTransaction()
-                        : ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: value.getAllExpenseList().length,
-                            itemBuilder: (context, index) => ExpenseTiles(
-                              expenseName:value.getAllExpenseList()[index].name,
-                              expenseAmount:value.getAllExpenseList()[index].amount,
-                              expenseDateTime:value.getAllExpenseList()[index].dateTime,
-                              type:value.getAllExpenseList()[index].type,
-                              deleteTapped: (p0) => deleteExpense(value.getAllExpenseList()[index]),
-                              editTapped: (p0) => updateCurrentExpense(
-                                  value.getAllExpenseList()[index],
-                                  value.getAllExpenseList()[index].name,
-                                  value.getAllExpenseList()[index].amount,
-                                  value.getAllExpenseList()[index].type,
+                  // Total Expense & Income
+                  TotalIncomeExpenseUi(
+                    income: Provider.of<ExpenseData>(context, listen: false).totalIncome(),
+                    expense: Provider.of<ExpenseData>(context, listen: false).totalExpense(),
+                  ),
+                  //
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  // Recent Transaction
+                  ComponentTitle(title: 'Recent Transaction'),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: value.getAllExpenseList().isEmpty
+                          ? const NoTransaction()
+                          : ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: value.getAllExpenseList().length,
+                              itemBuilder: (context, index) => ExpenseTiles(
+                                expenseName:value.getAllExpenseList()[index].name,
+                                expenseAmount:value.getAllExpenseList()[index].amount,
+                                expenseDateTime:value.getAllExpenseList()[index].dateTime,
+                                type:value.getAllExpenseList()[index].type,
+                                deleteTapped: (p0) => deleteExpense(value.getAllExpenseList()[index]),
+                                editTapped: (p0) => updateCurrentExpense(
+                                    value.getAllExpenseList()[index],
+                                    value.getAllExpenseList()[index].name,
+                                    value.getAllExpenseList()[index].amount,
+                                    value.getAllExpenseList()[index].type,
+                                ),
                               ),
                             ),
-                          ),
+                    ),
                   ),
-                ),
-              ],
-            ),
-          )),
+                ],
+              ),
+            )),
+      ),
     );
   }
 }

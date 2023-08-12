@@ -12,12 +12,12 @@ class ExpenseData extends ChangeNotifier{
 
   // Get expense list
   List<ExpenseItem> getAllExpenseList(){
-    return overAllExpenseList;
+    return overAllExpenseList.reversed.toList();
   }
   // Prepare data to display on launch form db
   void prepareData(){
     if(expenseCurd.readData().isNotEmpty){
-      overAllExpenseList = expenseCurd.readData();
+      overAllExpenseList = expenseCurd.readData().reversed.toList();
     }
   }
   // Add new expense
@@ -45,6 +45,40 @@ class ExpenseData extends ChangeNotifier{
     expenseCurd.saveData(overAllExpenseList);
   }
 
+  // Total balance
+  double totalBalance(){
+    double total = 0;
+    for(var expense in overAllExpenseList){
+      if(expense.type == 'Expense'){
+        total -= double.parse(expense.amount);
+      }else{
+        total += double.parse(expense.amount);
+      }
+    }
+    return total;
+  }
+
+  // Total expense
+  double totalExpense(){
+    double total = 0;
+    for(var expense in overAllExpenseList){
+      if(expense.type == 'Expense'){
+        total += double.parse(expense.amount);
+      }
+    }
+    return total;
+  }
+
+  // Total income
+  double totalIncome(){
+    double total = 0;
+    for(var expense in overAllExpenseList){
+      if(expense.type == 'Income'){
+        total += double.parse(expense.amount);
+      }
+    }
+    return total;
+  }
   // Get weekend (mon, tue, ect) from DateTime object
   String getDayName(DateTime dateTime){
     switch(dateTime.weekday){
