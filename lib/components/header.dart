@@ -9,7 +9,9 @@ class HeaderUi extends StatelessWidget {
     return Row(
       children: <Widget>[
         GestureDetector(
-          onTap: (){},
+          onTap: (){
+            Scaffold.of(context).openDrawer();
+          },
           child: Image.asset(
             'lib/icons/menu-icon.png',
             fit: BoxFit.cover, // Fixes border issues
@@ -20,7 +22,7 @@ class HeaderUi extends StatelessWidget {
         const SizedBox(
           width: 20,
         ),
-        Text('Expense Management',
+        Text('Spending.io',
             style: GoogleFonts.lato(
                 textStyle: Theme.of(context).textTheme.displayLarge,
                 fontSize: 25,

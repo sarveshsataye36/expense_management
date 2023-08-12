@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../components/components_title.dart';
+import '../components/custom_drawer.dart';
 import '../components/empty_transaction.dart';
 import '../components/expense_tiles.dart';
 import '../components/header.dart';
@@ -323,6 +324,7 @@ class _DashboardState extends State<Dashboard> {
                 backgroundColor: Colors.black54,
                 child: const Icon(Icons.add)),
             backgroundColor: lightRedBackground,
+            drawer: CustomDrawer(),
             body: Padding(
               padding: const EdgeInsets.all(14),
               child: Column(
