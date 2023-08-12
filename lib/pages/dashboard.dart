@@ -95,16 +95,21 @@ class _DashboardState extends State<Dashboard> {
                   const SizedBox(
                     height: 5,
                   ),
-                  TextField(
+                  TextFormField(
                     controller: newExpenseAmountController,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     keyboardType: TextInputType.number,
+                    validator: (value) {
+                      return value!.contains('-') ? 'Do not use the - ' : null;
+                    },
                     decoration: const InputDecoration(
                       hintText: "Amount",
                       border: OutlineInputBorder(borderSide: BorderSide()),
+
                     ),
                   ),
                   const SizedBox(
-                    height: 8,
+                    height: 12,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -113,7 +118,7 @@ class _DashboardState extends State<Dashboard> {
                         onPressed: saveExpense,
                         color: greenColor,
                         elevation: 0,
-                        padding: const EdgeInsets.all(20),
+                        padding: const EdgeInsets.fromLTRB(20,16,20,16),
                         child: const Text('Save'),
                       ),
                       const SizedBox(
@@ -122,7 +127,7 @@ class _DashboardState extends State<Dashboard> {
                       MaterialButton(
                         onPressed: cancelExpense,
                         elevation: 0,
-                        padding: const EdgeInsets.all(20),
+                        padding: const EdgeInsets.fromLTRB(20,16,20,16),
                         color: Colors.grey[100],
                         child: const Text('Cancel'),
                       ),
@@ -196,16 +201,20 @@ class _DashboardState extends State<Dashboard> {
                   const SizedBox(
                     height: 5,
                   ),
-                  TextField(
+                  TextFormField(
                     controller: newExpenseAmountController,
                     keyboardType: TextInputType.number,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (updateValue) {
+                      return updateValue!.contains('-') ? 'Do not use the - ' : null;
+                    },
                     decoration: const InputDecoration(
                       hintText: "Amount",
                       border: OutlineInputBorder(borderSide: BorderSide()),
                     ),
                   ),
                   const SizedBox(
-                    height: 8,
+                    height: 12,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -214,7 +223,7 @@ class _DashboardState extends State<Dashboard> {
                         onPressed: ()=>updateExpense(expense),
                         color: greenColor,
                         elevation: 0,
-                        padding: const EdgeInsets.all(20),
+                        padding: const EdgeInsets.fromLTRB(20,16,20,16),
                         child: const Text('Update'),
                       ),
                       const SizedBox(
@@ -223,7 +232,7 @@ class _DashboardState extends State<Dashboard> {
                       MaterialButton(
                         onPressed: cancelExpense,
                         elevation: 0,
-                        padding: const EdgeInsets.all(20),
+                        padding: const EdgeInsets.fromLTRB(20,16,20,16),
                         color: Colors.grey[100],
                         child: const Text('Cancel'),
                       ),
@@ -237,7 +246,7 @@ class _DashboardState extends State<Dashboard> {
   // Save Expense
   void saveExpense() {
     String type;
-    if (newExpenseNameController.text.isNotEmpty &&
+    if (!newExpenseAmountController.text.contains('-') && newExpenseNameController.text.isNotEmpty &&
         newExpenseAmountController.text.isNotEmpty) {
       if(switchValue != true){
         type = 'Expense';
@@ -272,7 +281,7 @@ class _DashboardState extends State<Dashboard> {
     }else{
       type = 'Income';
     }
-    if (newExpenseNameController.text.isNotEmpty &&
+    if (!newExpenseAmountController.text.contains('-') && newExpenseNameController.text.isNotEmpty &&
         newExpenseAmountController.text.isNotEmpty) {
       // create new Expense
       ExpenseItem newExpense =
