@@ -1,29 +1,28 @@
-import 'package:expense_management/components/total_balance.dart';
 import 'package:expense_management/module/expense_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import '../components/components_title.dart';
-import '../components/custom_drawer.dart';
-import '../components/empty_transaction.dart';
-import '../components/expense_tiles.dart';
-import '../components/header.dart';
-import '../components/total_income_expense.dart';
-import '../data/expense_data.dart';
-import '../helpers/constant.dart';
+import '../../components/components_title.dart';
+import '../../components/custom_drawer.dart';
+import '../../components/empty_transaction.dart';
+import '../../components/expense_tiles.dart';
+import '../../components/header.dart';
+import '../../components/top_menu_card.dart';
+import '../../data/expense_data.dart';
+import '../../helpers/constant.dart';
 
-class Dashboard extends StatefulWidget {
-  const Dashboard({super.key});
+class IncomeDashboard extends StatefulWidget {
+  const IncomeDashboard({super.key});
 
   @override
-  State<Dashboard> createState() => _DashboardState();
+  State<IncomeDashboard> createState() => _IncomeDashboardState();
 }
 
-class _DashboardState extends State<Dashboard> {
+class _IncomeDashboardState extends State<IncomeDashboard> {
   // text controller
-  final newExpenseNameController = TextEditingController();
-  final newExpenseAmountController = TextEditingController();
+  final newIncomeNameController = TextEditingController();
+  final newIncomeAmountController = TextEditingController();
 
   @override
   void initState() {
@@ -33,19 +32,19 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   void dispose() {
-    newExpenseNameController.dispose();
-    newExpenseAmountController.dispose();
+    newIncomeNameController.dispose();
+    newIncomeAmountController.dispose();
     super.dispose();
   }
 
   bool switchValue = true;
 
-  // Add new expense
-  void addNewExpense() {
+  // Add new Income
+  void addNewIncome() {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(content: StatefulBuilder(
-                builder: (BuildContext context, StateSetter setState) {
+            builder: (BuildContext context, StateSetter setState) {
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -57,7 +56,7 @@ class _DashboardState extends State<Dashboard> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Expense',
+                      Text('Income',
                         style: GoogleFonts.inter(
                             textStyle: Theme.of(context).textTheme.displayLarge,
                             fontSize: 16,
@@ -87,7 +86,7 @@ class _DashboardState extends State<Dashboard> {
                     height: 10,
                   ),
                   TextField(
-                    controller: newExpenseNameController,
+                    controller: newIncomeNameController,
                     decoration: const InputDecoration(
                       hintText: "Name",
                       border: OutlineInputBorder(borderSide: BorderSide()),
@@ -97,7 +96,7 @@ class _DashboardState extends State<Dashboard> {
                     height: 5,
                   ),
                   TextFormField(
-                    controller: newExpenseAmountController,
+                    controller: newIncomeAmountController,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     keyboardType: TextInputType.number,
                     validator: (value) {
@@ -116,7 +115,7 @@ class _DashboardState extends State<Dashboard> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       MaterialButton(
-                        onPressed: saveExpense,
+                        onPressed: saveIncome,
                         color: greenColor,
                         elevation: 0,
                         padding: const EdgeInsets.fromLTRB(20,16,20,16),
@@ -126,7 +125,7 @@ class _DashboardState extends State<Dashboard> {
                         width: 8,
                       ),
                       MaterialButton(
-                        onPressed: cancelExpense,
+                        onPressed: cancelIncome,
                         elevation: 0,
                         padding: const EdgeInsets.fromLTRB(20,16,20,16),
                         color: Colors.grey[100],
@@ -139,11 +138,11 @@ class _DashboardState extends State<Dashboard> {
             })));
   }
 
-  // Update current expense
-  void updateCurrentExpense(ExpenseItem expense, String name, String amount, String type) {
-    newExpenseNameController.text = name;
-    newExpenseAmountController.text = amount;
-    if(type == 'Expense'){
+  // Update current Income
+  void updateCurrentIncome(ExpenseItem income, String name, String amount, String type) {
+    newIncomeNameController.text = name;
+    newIncomeAmountController.text = amount;
+    if(type == 'Income'){
       switchValue = false;
     }else{
       switchValue = true;
@@ -163,7 +162,7 @@ class _DashboardState extends State<Dashboard> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Expense',
+                      Text('Income',
                         style: GoogleFonts.inter(
                             textStyle: Theme.of(context).textTheme.displayLarge,
                             fontSize: 16,
@@ -193,7 +192,7 @@ class _DashboardState extends State<Dashboard> {
                     height: 10,
                   ),
                   TextField(
-                    controller: newExpenseNameController,
+                    controller: newIncomeNameController,
                     decoration: const InputDecoration(
                       hintText: "Name",
                       border: OutlineInputBorder(borderSide: BorderSide()),
@@ -203,7 +202,7 @@ class _DashboardState extends State<Dashboard> {
                     height: 5,
                   ),
                   TextFormField(
-                    controller: newExpenseAmountController,
+                    controller: newIncomeAmountController,
                     keyboardType: TextInputType.number,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: (updateValue) {
@@ -221,7 +220,7 @@ class _DashboardState extends State<Dashboard> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       MaterialButton(
-                        onPressed: ()=>updateExpense(expense),
+                        onPressed: ()=>updateIncome(income),
                         color: greenColor,
                         elevation: 0,
                         padding: const EdgeInsets.fromLTRB(20,16,20,16),
@@ -231,7 +230,7 @@ class _DashboardState extends State<Dashboard> {
                         width: 8,
                       ),
                       MaterialButton(
-                        onPressed: cancelExpense,
+                        onPressed: cancelIncome,
                         elevation: 0,
                         padding: const EdgeInsets.fromLTRB(20,16,20,16),
                         color: Colors.grey[100],
@@ -244,52 +243,52 @@ class _DashboardState extends State<Dashboard> {
             })));
   }
 
-  // Save Expense
-  void saveExpense() {
+  // Save Income
+  void saveIncome() {
     String type;
-    if (!newExpenseAmountController.text.contains('-') && newExpenseNameController.text.isNotEmpty &&
-        newExpenseAmountController.text.isNotEmpty) {
+    if (!newIncomeAmountController.text.contains('-') && newIncomeNameController.text.isNotEmpty &&
+        newIncomeAmountController.text.isNotEmpty) {
       if(switchValue != true){
-        type = 'Expense';
+        type = 'Income';
       }else{
         type = 'Income';
       }
-      // create new Expense
-      ExpenseItem newExpense = ExpenseItem(
-          name: newExpenseNameController.text,
-          amount: newExpenseAmountController.text,
+      // create new Income
+      ExpenseItem newIncome = ExpenseItem(
+          name: newIncomeNameController.text,
+          amount: newIncomeAmountController.text,
           type: type,
           dateTime: DateTime.now());
 
-      // Add new expense
+      // Add new Income
       Provider.of<ExpenseData>(context, listen: false)
-          .addNewExpense(newExpense);
+          .addNewExpense(newIncome);
     }
     Provider.of<ExpenseData>(context, listen: false).totalBalance();
     Navigator.pop(context); // Remove the dialog box
     clearText();
   }
 
-  // Update Expense
-  void updateExpense(expense) {
-    // Updating expense Item
-    String name = newExpenseNameController.text;
-    String amount = newExpenseAmountController.text;
-    DateTime dateTime = expense.dateTime;
+  // Update Income
+  void updateIncome(income) {
+    // Updating Income Item
+    String name = newIncomeNameController.text;
+    String amount = newIncomeAmountController.text;
+    DateTime dateTime = income.dateTime;
     String type;
     if(switchValue != true){
-      type = 'Expense';
+      type = 'Income';
     }else{
       type = 'Income';
     }
-    if (!newExpenseAmountController.text.contains('-') && newExpenseNameController.text.isNotEmpty &&
-        newExpenseAmountController.text.isNotEmpty) {
-      // create new Expense
-      ExpenseItem newExpense =
-          ExpenseItem(name: name, amount: amount, type: type,dateTime: dateTime);
+    if (!newIncomeAmountController.text.contains('-') && newIncomeNameController.text.isNotEmpty &&
+        newIncomeAmountController.text.isNotEmpty) {
+      // create new Income
+      ExpenseItem newIncome =
+      ExpenseItem(name: name, amount: amount, type: type,dateTime: dateTime);
       //
       Provider.of<ExpenseData>(context, listen: false)
-          .updateExpense(expense, newExpense);
+          .updateExpense(income, newIncome);
       //
     }
     Provider.of<ExpenseData>(context, listen: false).totalBalance();
@@ -297,65 +296,65 @@ class _DashboardState extends State<Dashboard> {
     clearText();
   }
 
-  // cancel expense model
-  void cancelExpense() {
+  // cancel Income model
+  void cancelIncome() {
     Navigator.pop(context); // Remove the dialog box
     clearText();
   }
 
   // clear text control
   void clearText() {
-    newExpenseAmountController.clear();
-    newExpenseNameController.clear();
+    newIncomeAmountController.clear();
+    newIncomeNameController.clear();
   }
 
-  // Delete Expense
-  void deleteExpense(ExpenseItem expense) {
-    Provider.of<ExpenseData>(context, listen: false).deleteExpense(expense);
+  // Delete Income
+  void deleteIncome(ExpenseItem income) {
+    Provider.of<ExpenseData>(context, listen: false).deleteExpense(income);
   }
-
   @override
   Widget build(BuildContext context) {
-    return Consumer<ExpenseData>(
-      builder: (context, value, child) => SafeArea(
-        child: Scaffold(
-            floatingActionButton: FloatingActionButton(
-                onPressed: addNewExpense,
-                backgroundColor: Colors.black54,
-                child: const Icon(Icons.add)),
+    return SafeArea(
+        child: Consumer<ExpenseData>(builder: (context, value, child)=>Scaffold(
             backgroundColor: lightRedBackground,
             drawer: const CustomDrawer(),
             body: Padding(
-              padding: const EdgeInsets.all(14),
-              child: Column(
-                children: [
+                padding: const EdgeInsets.all(14),
+                child: Column(children: [
                   // App bar with heading
                   const HeaderUi(),
                   //
                   const SizedBox(
-                    height: 20,
+                    height: 14,
                   ),
-
-                  // Total Balance
-                  TotalBalanceUi(
-                    totalBalance: Provider.of<ExpenseData>(context, listen: false).totalBalance(),
+                  //
+                  SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            TopMenuItemCard(title: 'Total Income', subTitle: Provider.of<ExpenseData>(context, listen: false).totalIncome().toString(), onTapFunction: () { },),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            TopMenuItemCard(title: 'Weekly Income', subTitle: '50000', onTapFunction: () { },),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            TopMenuItemCard(title: 'Monthly Income', subTitle: '50000', onTapFunction: () { },),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            TopMenuItemCard(title: 'Yearly Income', subTitle: '50000', onTapFunction: () { },),
+                          ]
+                      )
                   ),
                   //
                   const SizedBox(
                     height: 20,
                   ),
-
-                  // Total Expense & Income
-                  TotalIncomeExpenseUi(
-                    income: Provider.of<ExpenseData>(context, listen: false).totalIncome(),
-                    expense: Provider.of<ExpenseData>(context, listen: false).totalExpense(),
-                  ),
-                  //
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  // Recent Transaction
-                  const ComponentTitle(title: 'Recent Transaction'),
+                  const ComponentTitle(title: 'Income List'),
                   const SizedBox(
                     height: 20,
                   ),
@@ -365,29 +364,27 @@ class _DashboardState extends State<Dashboard> {
                       child: value.getAllExpenseList().isEmpty
                           ? const NoTransaction()
                           : ListView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemCount: value.getAllExpenseList().length,
-                              itemBuilder: (context, index) => ExpenseTiles(
-                                expenseName:value.getAllExpenseList()[index].name,
-                                expenseAmount:value.getAllExpenseList()[index].amount,
-                                expenseDateTime:value.getAllExpenseList()[index].dateTime,
-                                type:value.getAllExpenseList()[index].type,
-                                deleteTapped: (p0) => deleteExpense(value.getAllExpenseList()[index]),
-                                editTapped: (p0) => updateCurrentExpense(
-                                    value.getAllExpenseList()[index],
-                                    value.getAllExpenseList()[index].name,
-                                    value.getAllExpenseList()[index].amount,
-                                    value.getAllExpenseList()[index].type,
-                                ),
-                              ),
-                            ),
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: value.getAllExpenseList().length,
+                          itemBuilder: (context, index) => value.getAllExpenseList()[index].type == 'Income' ? ExpenseTiles(
+                            expenseName:value.getAllExpenseList()[index].name,
+                            expenseAmount:value.getAllExpenseList()[index].amount,
+                            expenseDateTime:value.getAllExpenseList()[index].dateTime,
+                          type:value.getAllExpenseList()[index].type,
+                          deleteTapped: (p0) => deleteIncome(value.getAllExpenseList()[index]),
+                          editTapped: (p0) => updateCurrentIncome(
+                            value.getAllExpenseList()[index],
+                            value.getAllExpenseList()[index].name,
+                            value.getAllExpenseList()[index].amount,
+                            value.getAllExpenseList()[index].type,
+                          ),
+                        ) : const SizedBox(
+                            width: 0,
+                          ),
+                      ),
                     ),
                   ),
-                ],
-              ),
-            )),
-      ),
-    );
+                ])))));
   }
 }

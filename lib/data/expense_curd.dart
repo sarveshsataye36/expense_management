@@ -49,4 +49,21 @@ class ExpenseCurd{
     }
     return allExpense;
   }
+
+  void saveCurrency(String currency){
+    String currentCurrency;
+    if(currency == '₹ Rupee'){
+      currentCurrency = '₹';
+    }else if(currency == '\$ Dollar'){
+      currentCurrency = '\$';
+    }else{
+      currentCurrency = '€';
+    }
+    _myBox.put("CURRENCY", currentCurrency);
+  }
+
+  String readCurrency(){
+    String currency = _myBox.get("CURRENCY") ?? '₹';
+    return currency;
+  }
 }

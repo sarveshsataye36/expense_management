@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../data/expense_curd.dart';
 import '../helpers/constant.dart';
 
 class TotalIncomeExpenseUi extends StatelessWidget {
-  double income;
-  double expense;
-   TotalIncomeExpenseUi({super.key, required this.income, required this.expense});
-
+  final double income;
+  final double expense;
+  TotalIncomeExpenseUi({super.key, required this.income, required this.expense});
+  final expenseCurd = ExpenseCurd();
   @override
   Widget build(BuildContext context) {
+    String currentCurrency = expenseCurd.readCurrency();
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
@@ -43,7 +45,7 @@ class TotalIncomeExpenseUi extends StatelessWidget {
                   const SizedBox(
                     height: 5,
                   ),
-                  Text(income.toString(),
+                  Text('$currentCurrency$income',
                     style: GoogleFonts.inter(
                         textStyle: Theme.of(context).textTheme.displayLarge,
                         fontSize: 20,
@@ -88,7 +90,7 @@ class TotalIncomeExpenseUi extends StatelessWidget {
                   const SizedBox(
                     height: 5,
                   ),
-                  Text(expense.toString(),
+                  Text('$currentCurrency$expense',
                     style: GoogleFonts.inter(
                         textStyle: Theme.of(context).textTheme.displayLarge,
                         fontSize: 20,

@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../data/expense_curd.dart';
 import '../helpers/constant.dart';
 
 class TotalBalanceUi extends StatelessWidget {
-  double totalBalance;
+  final double totalBalance;
   TotalBalanceUi({super.key,required this.totalBalance});
-
+  final expenseCurd = ExpenseCurd();
   @override
   Widget build(BuildContext context) {
+
+    String currentCurrency = expenseCurd.readCurrency();
     return Container(
         width: double.infinity,
         height: 150,
@@ -37,7 +40,7 @@ class TotalBalanceUi extends StatelessWidget {
                     const SizedBox(
                       height: 5,
                     ),
-                    Text(totalBalance.toString(),
+                    Text('$currentCurrency$totalBalance',
                       style: GoogleFonts.inter(
                           textStyle: Theme.of(context).textTheme.displayLarge,
                           fontSize: 30,

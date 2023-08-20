@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'menu_item.dart';
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -27,19 +26,38 @@ class CustomDrawer extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          MenuItem(title: 'Dashboard', icon: Icons.dashboard_rounded, onTapFunction: (){}),
+          MenuItem(title: 'Dashboard', icon: Icons.dashboard_rounded, onTapFunction: (){
+            Navigator.of(context)
+                .pushReplacementNamed('/dashboard');
+          }),
           const SizedBox(
             height: 10,
           ),
-          MenuItem(title: 'Income', icon: Icons.arrow_upward_rounded, onTapFunction: (){}),
+          MenuItem(title: 'Income', icon: Icons.arrow_upward_rounded, onTapFunction: (){
+            Navigator.of(context)
+                .pushReplacementNamed('/income/income_dashboard');
+          }),
           const SizedBox(
             height: 10,
           ),
-          MenuItem(title: 'Expense', icon: Icons.arrow_downward_rounded, onTapFunction: (){}),
+          MenuItem(title: 'Expense', icon: Icons.arrow_downward_rounded, onTapFunction: (){
+            Navigator.of(context)
+                .pushReplacementNamed('/expense/expense_dashboard');
+          }),
           const SizedBox(
             height: 10,
           ),
-          MenuItem(title: 'About', icon: Icons.info_outline_rounded, onTapFunction: (){}),
+          MenuItem(title: 'Setting', icon: Icons.settings_rounded, onTapFunction: (){
+            Navigator.of(context)
+                .pushReplacementNamed('/setting/setting');
+          }),
+          const SizedBox(
+            height: 10,
+          ),
+          MenuItem(title: 'About', icon: Icons.info_outline_rounded, onTapFunction: (){
+            Navigator.of(context)
+                .pushReplacementNamed('/about/about');
+          }),
           const SizedBox(
             height: 10,
           ),

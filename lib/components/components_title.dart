@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ComponentTitle extends StatelessWidget {
-  String title;
-  ComponentTitle({super.key, required this.title});
+  final String title;
+  const ComponentTitle({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {

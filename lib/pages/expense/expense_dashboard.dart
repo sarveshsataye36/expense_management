@@ -1,26 +1,25 @@
-import 'package:expense_management/components/total_balance.dart';
 import 'package:expense_management/module/expense_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import '../components/components_title.dart';
-import '../components/custom_drawer.dart';
-import '../components/empty_transaction.dart';
-import '../components/expense_tiles.dart';
-import '../components/header.dart';
-import '../components/total_income_expense.dart';
-import '../data/expense_data.dart';
-import '../helpers/constant.dart';
+import '../../components/components_title.dart';
+import '../../components/custom_drawer.dart';
+import '../../components/empty_transaction.dart';
+import '../../components/expense_tiles.dart';
+import '../../components/header.dart';
+import '../../components/top_menu_card.dart';
+import '../../data/expense_data.dart';
+import '../../helpers/constant.dart';
 
-class Dashboard extends StatefulWidget {
-  const Dashboard({super.key});
+class ExpenseDashboard extends StatefulWidget {
+  const ExpenseDashboard({super.key});
 
   @override
-  State<Dashboard> createState() => _DashboardState();
+  State<ExpenseDashboard> createState() => _ExpenseDashboardState();
 }
 
-class _DashboardState extends State<Dashboard> {
+class _ExpenseDashboardState extends State<ExpenseDashboard> {
   // text controller
   final newExpenseNameController = TextEditingController();
   final newExpenseAmountController = TextEditingController();
@@ -40,16 +39,16 @@ class _DashboardState extends State<Dashboard> {
 
   bool switchValue = true;
 
-  // Add new expense
+  // Add new Expense
   void addNewExpense() {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(content: StatefulBuilder(
-                builder: (BuildContext context, StateSetter setState) {
+            builder: (BuildContext context, StateSetter setState) {
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  const ComponentTitle(title: 'Add Transaction'),
+                  ComponentTitle(title: 'Add Transaction'),
 
                   const SizedBox(
                     height: 15,
@@ -73,7 +72,7 @@ class _DashboardState extends State<Dashboard> {
                           });
                         },
                       ),
-                      Text('Income',
+                      Text('Expense',
                         style: GoogleFonts.inter(
                             textStyle: Theme.of(context).textTheme.displayLarge,
                             fontSize: 16,
@@ -139,7 +138,7 @@ class _DashboardState extends State<Dashboard> {
             })));
   }
 
-  // Update current expense
+  // Update current Expense
   void updateCurrentExpense(ExpenseItem expense, String name, String amount, String type) {
     newExpenseNameController.text = name;
     newExpenseAmountController.text = amount;
@@ -155,7 +154,7 @@ class _DashboardState extends State<Dashboard> {
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  const ComponentTitle(title: 'Update Transaction'),
+                  ComponentTitle(title: 'Update Transaction'),
 
                   const SizedBox(
                     height: 15,
@@ -179,7 +178,7 @@ class _DashboardState extends State<Dashboard> {
                           });
                         },
                       ),
-                      Text('Income',
+                      Text('Expense',
                         style: GoogleFonts.inter(
                             textStyle: Theme.of(context).textTheme.displayLarge,
                             fontSize: 16,
@@ -252,7 +251,7 @@ class _DashboardState extends State<Dashboard> {
       if(switchValue != true){
         type = 'Expense';
       }else{
-        type = 'Income';
+        type = 'Expense';
       }
       // create new Expense
       ExpenseItem newExpense = ExpenseItem(
@@ -261,7 +260,7 @@ class _DashboardState extends State<Dashboard> {
           type: type,
           dateTime: DateTime.now());
 
-      // Add new expense
+      // Add new Expense
       Provider.of<ExpenseData>(context, listen: false)
           .addNewExpense(newExpense);
     }
@@ -272,7 +271,7 @@ class _DashboardState extends State<Dashboard> {
 
   // Update Expense
   void updateExpense(expense) {
-    // Updating expense Item
+    // Updating Expense Item
     String name = newExpenseNameController.text;
     String amount = newExpenseAmountController.text;
     DateTime dateTime = expense.dateTime;
@@ -280,13 +279,13 @@ class _DashboardState extends State<Dashboard> {
     if(switchValue != true){
       type = 'Expense';
     }else{
-      type = 'Income';
+      type = 'Expense';
     }
     if (!newExpenseAmountController.text.contains('-') && newExpenseNameController.text.isNotEmpty &&
         newExpenseAmountController.text.isNotEmpty) {
       // create new Expense
       ExpenseItem newExpense =
-          ExpenseItem(name: name, amount: amount, type: type,dateTime: dateTime);
+      ExpenseItem(name: name, amount: amount, type: type,dateTime: dateTime);
       //
       Provider.of<ExpenseData>(context, listen: false)
           .updateExpense(expense, newExpense);
@@ -297,7 +296,7 @@ class _DashboardState extends State<Dashboard> {
     clearText();
   }
 
-  // cancel expense model
+  // cancel Expense model
   void cancelExpense() {
     Navigator.pop(context); // Remove the dialog box
     clearText();
@@ -313,49 +312,49 @@ class _DashboardState extends State<Dashboard> {
   void deleteExpense(ExpenseItem expense) {
     Provider.of<ExpenseData>(context, listen: false).deleteExpense(expense);
   }
-
   @override
   Widget build(BuildContext context) {
-    return Consumer<ExpenseData>(
-      builder: (context, value, child) => SafeArea(
-        child: Scaffold(
-            floatingActionButton: FloatingActionButton(
-                onPressed: addNewExpense,
-                backgroundColor: Colors.black54,
-                child: const Icon(Icons.add)),
+    return SafeArea(
+        child: Consumer<ExpenseData>(builder: (context, value, child)=>Scaffold(
             backgroundColor: lightRedBackground,
             drawer: const CustomDrawer(),
             body: Padding(
-              padding: const EdgeInsets.all(14),
-              child: Column(
-                children: [
+                padding: const EdgeInsets.all(14),
+                child: Column(children: [
                   // App bar with heading
                   const HeaderUi(),
                   //
                   const SizedBox(
-                    height: 20,
+                    height: 14,
                   ),
-
-                  // Total Balance
-                  TotalBalanceUi(
-                    totalBalance: Provider.of<ExpenseData>(context, listen: false).totalBalance(),
+                  //
+                  SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            TopMenuItemCard(title: 'Total Expense', subTitle: Provider.of<ExpenseData>(context, listen: false).totalExpense().toString(), onTapFunction: () { },),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            TopMenuItemCard(title: 'Weekly Expense', subTitle: '50000', onTapFunction: () { },),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            TopMenuItemCard(title: 'Monthly Expense', subTitle: '50000', onTapFunction: () { },),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            TopMenuItemCard(title: 'Yearly Expense', subTitle: '50000', onTapFunction: () { },),
+                          ]
+                      )
                   ),
                   //
                   const SizedBox(
                     height: 20,
                   ),
-
-                  // Total Expense & Income
-                  TotalIncomeExpenseUi(
-                    income: Provider.of<ExpenseData>(context, listen: false).totalIncome(),
-                    expense: Provider.of<ExpenseData>(context, listen: false).totalExpense(),
-                  ),
-                  //
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  // Recent Transaction
-                  const ComponentTitle(title: 'Recent Transaction'),
+                  ComponentTitle(title: 'Expense List'),
                   const SizedBox(
                     height: 20,
                   ),
@@ -365,29 +364,27 @@ class _DashboardState extends State<Dashboard> {
                       child: value.getAllExpenseList().isEmpty
                           ? const NoTransaction()
                           : ListView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemCount: value.getAllExpenseList().length,
-                              itemBuilder: (context, index) => ExpenseTiles(
-                                expenseName:value.getAllExpenseList()[index].name,
-                                expenseAmount:value.getAllExpenseList()[index].amount,
-                                expenseDateTime:value.getAllExpenseList()[index].dateTime,
-                                type:value.getAllExpenseList()[index].type,
-                                deleteTapped: (p0) => deleteExpense(value.getAllExpenseList()[index]),
-                                editTapped: (p0) => updateCurrentExpense(
-                                    value.getAllExpenseList()[index],
-                                    value.getAllExpenseList()[index].name,
-                                    value.getAllExpenseList()[index].amount,
-                                    value.getAllExpenseList()[index].type,
-                                ),
-                              ),
-                            ),
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: value.getAllExpenseList().length,
+                        itemBuilder: (context, index) => value.getAllExpenseList()[index].type == 'Expense' ? ExpenseTiles(
+                          expenseName:value.getAllExpenseList()[index].name,
+                          expenseAmount:value.getAllExpenseList()[index].amount,
+                          expenseDateTime:value.getAllExpenseList()[index].dateTime,
+                          type:value.getAllExpenseList()[index].type,
+                          deleteTapped: (p0) => deleteExpense(value.getAllExpenseList()[index]),
+                          editTapped: (p0) => updateCurrentExpense(
+                            value.getAllExpenseList()[index],
+                            value.getAllExpenseList()[index].name,
+                            value.getAllExpenseList()[index].amount,
+                            value.getAllExpenseList()[index].type,
+                          ),
+                        ) : const SizedBox(
+                          width: 0,
+                        ),
+                      ),
                     ),
                   ),
-                ],
-              ),
-            )),
-      ),
-    );
+                ])))));
   }
 }

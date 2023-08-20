@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import '../data/expense_curd.dart';
+
 class ExpenseTiles extends StatelessWidget {
   final String expenseName;
   final String expenseAmount;
   final String type;
   final DateTime expenseDateTime;
-  void Function(BuildContext)? deleteTapped;
-  void Function(BuildContext)? editTapped;
-
+  final void Function(BuildContext)? deleteTapped;
+  final void Function(BuildContext)? editTapped;
+  final expenseCurd = ExpenseCurd();
    ExpenseTiles({super.key, required this.expenseName, required this.expenseAmount, required this.expenseDateTime,required this.type, required this.deleteTapped, required this.editTapped});
 
 
   @override
   Widget build(BuildContext context) {
+    String currentCurrency = expenseCurd.readCurrency();
     return Slidable(
       endActionPane: ActionPane(
         motion:  const StretchMotion(),
@@ -37,7 +40,7 @@ class ExpenseTiles extends StatelessWidget {
         child: ListTile(
           title: Text(expenseName,style: const TextStyle(fontWeight: FontWeight.w600),),
           subtitle: Text('${expenseDateTime.day}/${expenseDateTime.month}/${expenseDateTime.year}'),
-          trailing: type == 'Expense' ? Text('- ₹ $expenseAmount',style: const TextStyle(color: Colors.redAccent,fontWeight: FontWeight.w600),) : Text('+ ₹ $expenseAmount',style: const TextStyle(color: Colors.green,fontWeight: FontWeight.w600),),
+          trailing: type == 'Expense' ? Text('- $currentCurrency$expenseAmount',style: const TextStyle(color: Colors.redAccent,fontWeight: FontWeight.w600),) : Text('+ $currentCurrency$expenseAmount',style: const TextStyle(color: Colors.green,fontWeight: FontWeight.w600),),
         ),
       ),
     );
