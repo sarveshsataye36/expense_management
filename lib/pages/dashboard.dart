@@ -367,7 +367,7 @@ class _DashboardState extends State<Dashboard> {
                           : ListView.builder(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
-                              itemCount: value.getAllExpenseList().length,
+                              itemCount: value.getAllExpenseList().length >= 6 ? 5 : value.getAllExpenseList().length,
                               itemBuilder: (context, index) => ExpenseTiles(
                                 expenseName:value.getAllExpenseList()[index].name,
                                 expenseAmount:value.getAllExpenseList()[index].amount,
