@@ -27,7 +27,7 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   void initState() {
-    super.initState();
+    super.initState(); // test data
     Provider.of<ExpenseData>(context, listen: false).prepareData();
   }
 

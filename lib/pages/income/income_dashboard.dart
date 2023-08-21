@@ -334,19 +334,19 @@ class _IncomeDashboardState extends State<IncomeDashboard> {
                         mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            TopMenuItemCard(title: 'Total Income', subTitle: Provider.of<ExpenseData>(context, listen: false).totalIncome().toString(), onTapFunction: () { },),
+                            TopMenuItemCard(title: 'Total Income', subTitle: value.totalIncome().toString(), onTapFunction: () { },),
                             const SizedBox(
                               width: 10,
                             ),
-                            TopMenuItemCard(title: 'Weekly Income', subTitle: '50000', onTapFunction: () { },),
+                            TopMenuItemCard(title: 'Weekly Income', subTitle: value.dateWiseTransactionTotal('Income','week').toString(), onTapFunction: () { },),
                             const SizedBox(
                               width: 10,
                             ),
-                            TopMenuItemCard(title: 'Monthly Income', subTitle: '50000', onTapFunction: () { },),
+                            TopMenuItemCard(title: 'Monthly Income', subTitle: value.dateWiseTransactionTotal('Income','month').toString(), onTapFunction: () { },),
                             const SizedBox(
                               width: 10,
                             ),
-                            TopMenuItemCard(title: 'Yearly Income', subTitle: '50000', onTapFunction: () { },),
+                            TopMenuItemCard(title: 'Yearly Income', subTitle: value.dateWiseTransactionTotal('Income','year').toString(), onTapFunction: () { },),
                           ]
                       )
                   ),

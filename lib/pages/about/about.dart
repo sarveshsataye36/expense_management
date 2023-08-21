@@ -6,7 +6,7 @@ class About extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: MaterialButton(
-        child: Text('Dashboard'), onPressed: () {
+        child: const Text('Dashboard'), onPressed: () {
         Navigator.of(context)
             .pushReplacementNamed('/dashboard');
       },

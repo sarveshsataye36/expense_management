@@ -48,7 +48,7 @@ class _ExpenseDashboardState extends State<ExpenseDashboard> {
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  ComponentTitle(title: 'Add Transaction'),
+                  const ComponentTitle(title: 'Add Transaction'),
 
                   const SizedBox(
                     height: 15,
@@ -154,7 +154,7 @@ class _ExpenseDashboardState extends State<ExpenseDashboard> {
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  ComponentTitle(title: 'Update Transaction'),
+                  const ComponentTitle(title: 'Update Transaction'),
 
                   const SizedBox(
                     height: 15,
@@ -334,19 +334,19 @@ class _ExpenseDashboardState extends State<ExpenseDashboard> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            TopMenuItemCard(title: 'Total Expense', subTitle: Provider.of<ExpenseData>(context, listen: false).totalExpense().toString(), onTapFunction: () { },),
+                            TopMenuItemCard(title: 'Total Expense', subTitle: value.totalExpense().toString(), onTapFunction: () { },),
                             const SizedBox(
                               width: 10,
                             ),
-                            TopMenuItemCard(title: 'Weekly Expense', subTitle: '50000', onTapFunction: () { },),
+                            TopMenuItemCard(title: 'Weekly Expense', subTitle: value.dateWiseTransactionTotal('Expense','week').toString(), onTapFunction: () { },),
                             const SizedBox(
                               width: 10,
                             ),
-                            TopMenuItemCard(title: 'Monthly Expense', subTitle: '50000', onTapFunction: () { },),
+                            TopMenuItemCard(title: 'Monthly Expense', subTitle: value.dateWiseTransactionTotal('Expense','month').toString(), onTapFunction: () { },),
                             const SizedBox(
                               width: 10,
                             ),
-                            TopMenuItemCard(title: 'Yearly Expense', subTitle: '50000', onTapFunction: () { },),
+                            TopMenuItemCard(title: 'Yearly Expense', subTitle: value.dateWiseTransactionTotal('Expense','year').toString(), onTapFunction: () { },),
                           ]
                       )
                   ),
@@ -354,7 +354,7 @@ class _ExpenseDashboardState extends State<ExpenseDashboard> {
                   const SizedBox(
                     height: 20,
                   ),
-                  ComponentTitle(title: 'Expense List'),
+                  const ComponentTitle(title: 'Expense List'),
                   const SizedBox(
                     height: 20,
                   ),

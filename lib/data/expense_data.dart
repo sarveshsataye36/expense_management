@@ -20,6 +20,28 @@ class ExpenseData extends ChangeNotifier{
       overAllExpenseList = expenseCurd.readData().reversed.toList();
     }
   }
+
+  // List by week, month, year
+  List<ExpenseItem> dateWiseTransactionList(type){
+    List<ExpenseItem> changeTransactionList = [];
+    DateTime now = DateTime.now();
+    DateTime transactionDateType;
+    if(type == 'month'){
+       transactionDateType = DateTime(now.month);
+    }else if(type == 'year'){
+       transactionDateType = DateTime(now.year);
+    }else{
+       transactionDateType = now.subtract(const Duration(days: 7));
+    }
+    changeTransactionList.addAll(
+        overAllExpenseList.
+        where((element) {
+          final date = element.dateTime;
+          return transactionDateType.isBefore(date);
+        }
+        ));
+    return changeTransactionList;
+  }
   // Add new expense
   void addNewExpense(ExpenseItem newExpense){
     overAllExpenseList.add(newExpense);
@@ -79,6 +101,34 @@ class ExpenseData extends ChangeNotifier{
     }
     return total;
   }
+
+  // week, month, year wise transaction total
+  double dateWiseTransactionTotal(String type, String dateType){
+    double total = 0;
+    List dateWiseList = [];
+    if(dateType == 'week'){
+       dateWiseList = dateWiseTransactionList('week');
+    }else if(dateType == 'month'){
+       dateWiseList = dateWiseTransactionList('month');
+    }else{
+       dateWiseList = dateWiseTransactionList('year');
+    }
+
+    for(var expense in dateWiseList){
+      if(type == 'Income'){
+        if(expense.type == 'Income'){
+          total += double.parse(expense.amount);
+        }
+      }else{
+        if(expense.type == 'Expense'){
+          total += double.parse(expense.amount);
+        }
+      }
+
+    }
+    return total;
+  }
+
   // Get weekend (mon, tue, ect) from DateTime object
   String getDayName(DateTime dateTime){
     switch(dateTime.weekday){

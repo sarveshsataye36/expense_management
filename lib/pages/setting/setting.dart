@@ -24,7 +24,7 @@ class Setting extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              ComponentTitle(title: 'Setting'),
+              const ComponentTitle(title: 'Setting'),
               const SizedBox(
                 height: 20,
               ),
@@ -85,7 +85,7 @@ class _DropdownButtonExampleState extends State<DropdownButtonExample> {
         // This is called when the user selects an item.
         setState(() {
           expenseCurd.saveCurrency(value!);
-          dropdownValue = value!;
+          dropdownValue = value;
         });
       },
       items: currency.map<DropdownMenuItem<String>>((String value) {
