@@ -334,19 +334,19 @@ class _ExpenseDashboardState extends State<ExpenseDashboard> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            TopMenuItemCard(title: 'Total Expense', subTitle: value.totalExpense().toString(), onTapFunction: () { },),
+                            TopMenuItemCard(title: 'Total Expense', subTitle: value.totalExpense().toString(), active: true, onTapFunction: () { },),
                             const SizedBox(
                               width: 10,
                             ),
-                            TopMenuItemCard(title: 'Weekly Expense', subTitle: value.dateWiseTransactionTotal('Expense','week').toString(), onTapFunction: () { },),
+                            TopMenuItemCard(title: 'Weekly Expense', subTitle: value.dateWiseTransactionTotal('Expense','week').toString(), active: false, onTapFunction: () { },),
                             const SizedBox(
                               width: 10,
                             ),
-                            TopMenuItemCard(title: 'Monthly Expense', subTitle: value.dateWiseTransactionTotal('Expense','month').toString(), onTapFunction: () { },),
+                            TopMenuItemCard(title: 'Monthly Expense', subTitle: value.dateWiseTransactionTotal('Expense','month').toString(), active: false, onTapFunction: () { },),
                             const SizedBox(
                               width: 10,
                             ),
-                            TopMenuItemCard(title: 'Yearly Expense', subTitle: value.dateWiseTransactionTotal('Expense','year').toString(), onTapFunction: () { },),
+                            TopMenuItemCard(title: 'Yearly Expense', subTitle: value.dateWiseTransactionTotal('Expense','year').toString(), active: false, onTapFunction: () { },),
                           ]
                       )
                   ),

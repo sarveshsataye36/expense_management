@@ -5,8 +5,9 @@ import '../data/expense_curd.dart';
 class TopMenuItemCard extends StatelessWidget {
   final String title;
   final String subTitle;
+  final bool active;
   final VoidCallback onTapFunction;
-  TopMenuItemCard({super.key, required this.title, required this.subTitle, required this.onTapFunction});
+  TopMenuItemCard({super.key, required this.title, required this.subTitle, required this.active, required this.onTapFunction});
   final expenseCurd = ExpenseCurd();
   @override
   Widget build(BuildContext context) {
@@ -19,8 +20,8 @@ class TopMenuItemCard extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
             color: Colors.white,
-            border: Border.all(color: const Color(0xD9C9C9CB)),
-            borderRadius: BorderRadius.circular(8)
+            border: Border.all(color: active ? Colors.green : const Color(0xD9C9C9CB)),
+            borderRadius: BorderRadius.circular(6)
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
