@@ -12,14 +12,14 @@ import '../../components/top_menu_card.dart';
 import '../../data/expense_data.dart';
 import '../../helpers/constant.dart';
 
-class ExpenseDashboard extends StatefulWidget {
-  const ExpenseDashboard({super.key});
+class YearExpense extends StatefulWidget {
+  const YearExpense({super.key});
 
   @override
-  State<ExpenseDashboard> createState() => _ExpenseDashboardState();
+  State<YearExpense> createState() => YearhExpenseState();
 }
 
-class _ExpenseDashboardState extends State<ExpenseDashboard> {
+class YearhExpenseState extends State<YearExpense> {
   // text controller
   final newExpenseNameController = TextEditingController();
   final newExpenseAmountController = TextEditingController();
@@ -334,7 +334,7 @@ class _ExpenseDashboardState extends State<ExpenseDashboard> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            TopMenuItemCard(title: 'Total Expense', subTitle: value.totalExpense().toString(), active: true, onTapFunction: () {
+                            TopMenuItemCard(title: 'Total Expense', subTitle: value.totalExpense().toString(), active: false, onTapFunction: () {
                               Navigator.of(context)
                                   .pushReplacementNamed('/expense/expense_dashboard');
                             },),
@@ -355,10 +355,7 @@ class _ExpenseDashboardState extends State<ExpenseDashboard> {
                             const SizedBox(
                               width: 10,
                             ),
-                            TopMenuItemCard(title: 'Yearly Expense', subTitle: value.dateWiseTransactionTotal('Expense','year').toString(), active: false, onTapFunction: () {
-                              Navigator.of(context)
-                                  .pushReplacementNamed('/expense/year_expense');
-                            },),
+                            TopMenuItemCard(title: 'Yearly Expense', subTitle: value.dateWiseTransactionTotal('Expense','year').toString(), active: true, onTapFunction: () {},),
                           ]
                       )
                   ),
@@ -373,23 +370,23 @@ class _ExpenseDashboardState extends State<ExpenseDashboard> {
                   Expanded(
                     child: SingleChildScrollView(
                       scrollDirection: Axis.vertical,
-                      child: value.getAllExpenseList().isEmpty
+                      child: value.dateWiseTransactionList('year').isEmpty
                           ? const NoTransaction()
                           : ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: value.getAllExpenseList().length,
-                        itemBuilder: (context, index) => value.getAllExpenseList()[index].type == 'Expense' ? ExpenseTiles(
-                          expenseName:value.getAllExpenseList()[index].name,
-                          expenseAmount:value.getAllExpenseList()[index].amount,
-                          expenseDateTime:value.getAllExpenseList()[index].dateTime,
-                          type:value.getAllExpenseList()[index].type,
-                          deleteTapped: (p0) => deleteExpense(value.getAllExpenseList()[index]),
+                        itemCount: value.dateWiseTransactionList('year').length,
+                        itemBuilder: (context, index) => value.dateWiseTransactionList('year')[index].type == 'Expense' ? ExpenseTiles(
+                          expenseName:value.dateWiseTransactionList('year')[index].name,
+                          expenseAmount:value.dateWiseTransactionList('year')[index].amount,
+                          expenseDateTime:value.dateWiseTransactionList('year')[index].dateTime,
+                          type:value.dateWiseTransactionList('year')[index].type,
+                          deleteTapped: (p0) => deleteExpense(value.dateWiseTransactionList('year')[index]),
                           editTapped: (p0) => updateCurrentExpense(
-                            value.getAllExpenseList()[index],
-                            value.getAllExpenseList()[index].name,
-                            value.getAllExpenseList()[index].amount,
-                            value.getAllExpenseList()[index].type,
+                            value.dateWiseTransactionList('year')[index],
+                            value.dateWiseTransactionList('year')[index].name,
+                            value.dateWiseTransactionList('year')[index].amount,
+                            value.dateWiseTransactionList('year')[index].type,
                           ),
                         ) : const SizedBox(
                           width: 0,

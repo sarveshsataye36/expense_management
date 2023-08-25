@@ -1,12 +1,18 @@
-import 'package:expense_management/data/expense_data.dart';
-import 'pages/about/about.dart';
-import 'pages/expense/expense_dashboard.dart';
-import 'pages/income/income_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
+import 'data/expense_data.dart';
+import 'pages/about/about.dart';
+import 'pages/expense/expense_dashboard.dart';
+import 'pages/expense/month_expense.dart';
+import 'pages/expense/week_expense.dart';
+import 'pages/expense/year_expense.dart';
+import 'pages/income/income_dashboard.dart';
 import 'helpers/constant.dart';
 import 'pages/dashboard.dart';
+import 'pages/income/year_income.dart';
+import 'pages/income/month_income.dart';
+import 'pages/income/week_income.dart';
 import 'pages/setting/setting.dart';
 
 void main() async{
@@ -38,6 +44,12 @@ class ExpenseManagementApp extends StatelessWidget {
           '/expense/expense_dashboard': (BuildContext context) => const ExpenseDashboard(),
           '/setting/setting': (BuildContext context) => const Setting(),
           '/about/about': (BuildContext context) => const About(),
+          '/income/week_income': (BuildContext context) => const WeekIncome(),
+          '/income/month_income': (BuildContext context) => const MonthIncome(),
+          '/income/year_income': (BuildContext context) => const YearIncome(),
+          '/expense/week_expense': (BuildContext context) => const WeekExpense(),
+          '/expense/month_expense': (BuildContext context) => const MonthExpense(),
+          '/expense/year_expense': (BuildContext context) => const YearExpense(),
         },
         home: const Dashboard(),
       ),

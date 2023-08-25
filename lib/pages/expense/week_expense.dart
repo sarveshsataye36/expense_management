@@ -12,14 +12,14 @@ import '../../components/top_menu_card.dart';
 import '../../data/expense_data.dart';
 import '../../helpers/constant.dart';
 
-class ExpenseDashboard extends StatefulWidget {
-  const ExpenseDashboard({super.key});
+class WeekExpense extends StatefulWidget {
+  const WeekExpense({super.key});
 
   @override
-  State<ExpenseDashboard> createState() => _ExpenseDashboardState();
+  State<WeekExpense> createState() => WeekExpenseState();
 }
 
-class _ExpenseDashboardState extends State<ExpenseDashboard> {
+class WeekExpenseState extends State<WeekExpense> {
   // text controller
   final newExpenseNameController = TextEditingController();
   final newExpenseAmountController = TextEditingController();
@@ -334,17 +334,14 @@ class _ExpenseDashboardState extends State<ExpenseDashboard> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            TopMenuItemCard(title: 'Total Expense', subTitle: value.totalExpense().toString(), active: true, onTapFunction: () {
+                            TopMenuItemCard(title: 'Total Expense', subTitle: value.totalExpense().toString(), active: false, onTapFunction: () {
                               Navigator.of(context)
                                   .pushReplacementNamed('/expense/expense_dashboard');
                             },),
                             const SizedBox(
                               width: 10,
                             ),
-                            TopMenuItemCard(title: 'Weekly Expense', subTitle: value.dateWiseTransactionTotal('Expense','week').toString(), active: false, onTapFunction: () {
-                              Navigator.of(context)
-                                  .pushReplacementNamed('/expense/week_expense');
-                            },),
+                            TopMenuItemCard(title: 'Weekly Expense', subTitle: value.dateWiseTransactionTotal('Expense','week').toString(), active: true, onTapFunction: () {},),
                             const SizedBox(
                               width: 10,
                             ),
@@ -373,23 +370,23 @@ class _ExpenseDashboardState extends State<ExpenseDashboard> {
                   Expanded(
                     child: SingleChildScrollView(
                       scrollDirection: Axis.vertical,
-                      child: value.getAllExpenseList().isEmpty
+                      child: value.dateWiseTransactionList('week').isEmpty
                           ? const NoTransaction()
                           : ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: value.getAllExpenseList().length,
-                        itemBuilder: (context, index) => value.getAllExpenseList()[index].type == 'Expense' ? ExpenseTiles(
-                          expenseName:value.getAllExpenseList()[index].name,
-                          expenseAmount:value.getAllExpenseList()[index].amount,
-                          expenseDateTime:value.getAllExpenseList()[index].dateTime,
-                          type:value.getAllExpenseList()[index].type,
-                          deleteTapped: (p0) => deleteExpense(value.getAllExpenseList()[index]),
+                        itemCount: value.dateWiseTransactionList('week').length,
+                        itemBuilder: (context, index) => value.dateWiseTransactionList('week')[index].type == 'Expense' ? ExpenseTiles(
+                          expenseName:value.dateWiseTransactionList('week')[index].name,
+                          expenseAmount:value.dateWiseTransactionList('week')[index].amount,
+                          expenseDateTime:value.dateWiseTransactionList('week')[index].dateTime,
+                          type:value.dateWiseTransactionList('week')[index].type,
+                          deleteTapped: (p0) => deleteExpense(value.dateWiseTransactionList('week')[index]),
                           editTapped: (p0) => updateCurrentExpense(
-                            value.getAllExpenseList()[index],
-                            value.getAllExpenseList()[index].name,
-                            value.getAllExpenseList()[index].amount,
-                            value.getAllExpenseList()[index].type,
+                            value.dateWiseTransactionList('week')[index],
+                            value.dateWiseTransactionList('week')[index].name,
+                            value.dateWiseTransactionList('week')[index].amount,
+                            value.dateWiseTransactionList('week')[index].type,
                           ),
                         ) : const SizedBox(
                           width: 0,
