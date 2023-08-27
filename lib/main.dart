@@ -3,6 +3,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 import 'data/expense_data.dart';
 import 'pages/about/about.dart';
+import 'pages/analytics/analytics_dashboard.dart';
 import 'pages/expense/expense_dashboard.dart';
 import 'pages/expense/month_expense.dart';
 import 'pages/expense/week_expense.dart';
@@ -50,6 +51,7 @@ class ExpenseManagementApp extends StatelessWidget {
           '/expense/week_expense': (BuildContext context) => const WeekExpense(),
           '/expense/month_expense': (BuildContext context) => const MonthExpense(),
           '/expense/year_expense': (BuildContext context) => const YearExpense(),
+          '/analytics/analytics_dashboard': (BuildContext context) => const AnalyticDashboard(),
         },
         home: const Dashboard(),
       ),

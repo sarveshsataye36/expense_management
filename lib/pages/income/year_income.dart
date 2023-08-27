@@ -363,7 +363,7 @@ class _YearIncomeState extends State<YearIncome> {
                   const SizedBox(
                     height: 20,
                   ),
-                  const ComponentTitle(title: 'Income List'),
+                  const ComponentTitle(title: 'Year Income List'),
                   const SizedBox(
                     height: 20,
                   ),

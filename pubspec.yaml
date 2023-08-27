@@ -41,6 +41,7 @@ dependencies:
   flutter_slidable:
   hive:
   hive_flutter:
+  custom_date_range_picker: ^1.0.10
 
 dev_dependencies:
   flutter_test:

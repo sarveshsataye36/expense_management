@@ -191,4 +191,9 @@ class ExpenseData extends ChangeNotifier{
     return dailyExpenseSummary;
   }
 
+  // Date wise filter transaction
+  List<ExpenseItem> dateWiseFilter(DateTime startDate, DateTime endDate){
+    List<ExpenseItem> changeTransactionList = [];
+    return changeTransactionList;
+  }
 }

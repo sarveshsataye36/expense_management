@@ -363,7 +363,7 @@ class _MonthIncomeState extends State<MonthIncome> {
                   const SizedBox(
                     height: 20,
                   ),
-                  const ComponentTitle(title: 'Income List'),
+                  const ComponentTitle(title: 'Month Income List'),
                   const SizedBox(
                     height: 20,
                   ),

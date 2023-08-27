@@ -47,6 +47,13 @@ class CustomDrawer extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
+          MenuItem(title: 'Analytics', icon: Icons.analytics_rounded, onTapFunction: (){
+            Navigator.of(context)
+                .pushReplacementNamed('/analytics/analytics_dashboard');
+          }),
+          const SizedBox(
+            height: 10,
+          ),
           MenuItem(title: 'Setting', icon: Icons.settings_rounded, onTapFunction: (){
             Navigator.of(context)
                 .pushReplacementNamed('/setting/setting');

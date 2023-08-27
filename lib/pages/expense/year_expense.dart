@@ -363,7 +363,7 @@ class YearhExpenseState extends State<YearExpense> {
                   const SizedBox(
                     height: 20,
                   ),
-                  const ComponentTitle(title: 'Expense List'),
+                  const ComponentTitle(title: 'Year Expense List'),
                   const SizedBox(
                     height: 20,
                   ),

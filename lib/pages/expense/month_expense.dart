@@ -363,7 +363,7 @@ class _MonthExpenseState extends State<MonthExpense> {
                   const SizedBox(
                     height: 20,
                   ),
-                  const ComponentTitle(title: 'Expense List'),
+                  const ComponentTitle(title: 'Month Expense List'),
                   const SizedBox(
                     height: 20,
                   ),

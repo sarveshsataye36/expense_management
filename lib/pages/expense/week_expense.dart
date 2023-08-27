@@ -363,7 +363,7 @@ class WeekExpenseState extends State<WeekExpense> {
                   const SizedBox(
                     height: 20,
                   ),
-                  const ComponentTitle(title: 'Expense List'),
+                  const ComponentTitle(title: 'Week Expense List'),
                   const SizedBox(
                     height: 20,
                   ),
