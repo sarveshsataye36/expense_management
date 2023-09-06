@@ -192,8 +192,33 @@ class ExpenseData extends ChangeNotifier{
   }
 
   // Date wise filter transaction
-  List<ExpenseItem> dateWiseFilter(DateTime startDate, DateTime endDate){
+  List<ExpenseItem>? dateWiseFilter(DateTime startDate, DateTime endDate) {
     List<ExpenseItem> changeTransactionList = [];
-    return changeTransactionList;
+    for (var expense in overAllExpenseList) {
+      if (expense.dateTime.compareTo(startDate) >= 0 && expense.dateTime.compareTo(endDate) <= 0) {
+        changeTransactionList.add(expense);
+      }
+    }
+      return changeTransactionList;
+    }
+
+  // week, month, year wise transaction total
+  double dateWiseFilterTransactionTotal(DateTime startDate, DateTime endDate, String totalType){
+    double total = 0;
+    List dateWiseFilterList = dateWiseFilter(startDate,endDate)!;
+    for(var expense in dateWiseFilterList){
+      if(totalType == 'Income'){
+        if(expense.type == 'Income'){
+          total += double.parse(expense.amount);
+        }
+      }else{
+        if(expense.type == 'Expense'){
+          total += double.parse(expense.amount);
+        }
+      }
+
+    }
+    return total;
   }
-}
+  }
+  //
