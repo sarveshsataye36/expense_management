@@ -128,8 +128,8 @@ class _AnalyticDashboardState extends State<AnalyticDashboard> {
                               child: Column(
                             children: [
                               PieChartTotal(
-                                  income: value.dateWiseFilterTransactionTotal(startDate,endDate,'Income') == 0.0 ? 1: value.dateWiseFilterTransactionTotal(startDate,endDate,'Income'),
-                                  expense: value.dateWiseFilterTransactionTotal(startDate,endDate,'Expense')
+                                   incomeVal:value.dateWiseFilterTransactionTotal(startDate,endDate,'Income') == 0.0 ? 1: value.dateWiseFilterTransactionTotal(startDate,endDate,'Income'),
+                                   expenseVal:value.dateWiseFilterTransactionTotal(startDate,endDate,'Expense')
                               ),
                               value.dateWiseFilter(startDate,endDate)!.isEmpty
                                   ? const NoTransaction()

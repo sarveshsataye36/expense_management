@@ -2,19 +2,11 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import '../components/indicator.dart';
 
-class PieChartTotal extends StatefulWidget {
-  final double income;
-  final double expense;
-  const PieChartTotal({super.key, required this.income, required this.expense});
-  @override
-  State<StatefulWidget> createState() => PieChartTotalState(income,expense);
-}
-
-class PieChartTotalState extends State {
-  int touchedIndex = -1;
-  PieChartTotalState(this.incomeVal, this.expenseVal);
+class PieChartTotal extends StatelessWidget {
   final double incomeVal;
   final double expenseVal;
+  const PieChartTotal({required this.incomeVal, required this.expenseVal, super.key});
+
   @override
   Widget build(BuildContext context) {
     double total = incomeVal + expenseVal;
@@ -32,20 +24,6 @@ class PieChartTotalState extends State {
               aspectRatio: 1,
               child: PieChart(
                 PieChartData(
-                  pieTouchData: PieTouchData(
-                    touchCallback: (FlTouchEvent event, pieTouchResponse) {
-                      setState(() {
-                        if (!event.isInterestedForInteractions ||
-                            pieTouchResponse == null ||
-                            pieTouchResponse.touchedSection == null) {
-                          touchedIndex = -1;
-                          return;
-                        }
-                        touchedIndex = pieTouchResponse
-                            .touchedSection!.touchedSectionIndex;
-                      });
-                    },
-                  ),
                   borderData: FlBorderData(
                     show: false,
                   ),
@@ -85,9 +63,6 @@ class PieChartTotalState extends State {
 
   List<PieChartSectionData> showingSections(income,expense) {
     return List.generate(2, (i) {
-      final isTouched = i == touchedIndex;
-      final fontSize = isTouched ? 25.0 : 16.0;
-      final radius = isTouched ? 60.0 : 50.0;
       const shadows = [Shadow(color: Colors.black, blurRadius: 2)];
       switch (i) {
         case 0:
@@ -95,9 +70,7 @@ class PieChartTotalState extends State {
             color: Colors.green,
             value: income,
             title: income.toStringAsFixed(2) + '%',
-            radius: radius,
-            titleStyle: TextStyle(
-              fontSize: fontSize,
+            titleStyle: const TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.white,
               shadows: shadows,
@@ -108,9 +81,7 @@ class PieChartTotalState extends State {
             color: Colors.redAccent,
             value: expense,
             title: expense.toStringAsFixed(2) + '%',
-            radius: radius,
-            titleStyle: TextStyle(
-              fontSize: fontSize,
+            titleStyle: const TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.white,
               shadows: shadows,
