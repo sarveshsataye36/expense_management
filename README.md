@@ -1,7 +1,7 @@
 
-# Expense Management App
+# Expense Management Flutter App
 
-Welcome to the Expense Management App! This Flutter-based application provides a simple and efficient way to manage your expenses and income. Keep track of your financial transactions, calculate total expenses and income, and gain insights through the dashboard feature.
+Welcome to the Expense Management Flutter App! This Flutter-based application provides a simple and efficient way to manage your expenses and income. Keep track of your financial transactions, calculate total expenses and income, and gain insights through the dashboard feature.
 
 
 ## Getting Started
